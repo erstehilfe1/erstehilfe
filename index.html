@@ -1,12 +1,236 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hallo Welt</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suat's Homepage</title>
+  <!-- Materialize CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- Custom CSS for Animation and Layout -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 100%; 
+      height: auto;
+      margin-top: 20px;
+      padding: 20px;
+      text-align: center;
+      background-color: white;
+    }
+
+    p {
+      font-size: 18px; 
+      color: black; 
+    }
+	
+    iframe {
+      width: 100%;  /* Volle Breite des übergeordneten Containers */
+      height: 450px; /* Feste Höhe */
+      border: 0;
+    }
+	
+	.map-card {
+      padding: 0;  /* Kein Padding innerhalb der Karte */
+    }
+	
+    .card-content {
+      text-align: left;
+    }
+
+    .card-content p {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center; /* Vertikale Ausrichtung des Icons und Texts */
+    }
+
+    .card-content i {
+      color: green; /* Farbe des Häkchens */
+      margin-right: 10px; /* Abstand zwischen Icon und Text */
+    }
+	
+	.containerHeader {
+		margin-top: 100px;
+		background-color: rgba(144, 238, 144, 0.7);
+		padding: 30px;
+		border-radius: 10px;
+		animation: zoomIn 1.5s ease-out;
+	}
+	@keyframes zoomIn {
+		from { opacity: 0; transform: scale(0.8); }
+		to { opacity: 1; transform: scale(1); }
+	}
+	.header {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	.header h1 {
+		font-size: 3rem;
+	}
+	
+	.cardAnimation {
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.cardAnimation:hover {
+		transform: scale(1.05); /* Vergrößert die Karte leicht */
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Fügt einen Schatten hinzu */
+	}
+	
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      opacity: 0.8;
+      user-select: none;
+    }	
+
+	
+  </style>
+
+  <!-- Favicon -->
+  <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Hallo Welt!</h1>
-    <p>Willkommen auf meiner ersten HTML-Seite.</p>
+  
+  <!-- Navigation -->
+    <div class="navbar-fixed">
+	  <nav>
+		<div class="nav-wrapper" style="background-color: lightgreen;">
+		  <a href="index.html" class="brand-logo">Tel: 0221 123456</a>
+		  <a href="#" data-target="mobile-nav" class="sidenav-trigger right"><i class="material-icons" style="font-size: 48px;">menu</i></a>
+		  <ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+		</div>
+	  </nav>
+	</div>
+
+  <!-- Side Navigation for Mobile -->
+  <ul class="sidenav" id="mobile-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  
+   <div class="containerHeader"> 
+	  <div class="header">
+		<h1>Erste Hilfe Kurs in Köln</h1>
+	  </div>
+    </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- Card 1: Erste Hilfe Kurse -->
+      <div class="col s12 m6"> <!-- s12 für kleine Geräte, m6 für mittlere und größere Geräte -->
+        <div class="card cardAnimation">
+          <div class="card-content">
+            <span class="card-title">Erste Hilfe Kurse in Köln Chorweiler</span>			
+			  <p><i class="material-icons">check</i>Erste Hilfe Kurse für den Führerschein.</p>
+			  <p><i class="material-icons">check</i>Regelmäßige Samstag-Kurse</p>			  
+			  <p><i class="material-icons">check</i>Nur 1 Tag (7,5 Stunden)</p>
+			  <p><i class="material-icons">check</i>Gültig für alle Führerscheinklassen</p>	
+
+			  <p><i class="material-icons">check</i>Anmeldung unter der Telefonnummer: </p>				  
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 2: Hüseyin Bicer -->
+      <div class="col s12 m6"> <!-- s12 für kleine Geräte, m6 für mittlere und größere Geräte -->
+        <div class="card cardAnimation">
+          <div class="card-content">
+            <span class="card-title">Hüseyin Bicer</span>
+            <p>The best help coach.</p>
+			
+			 <p>Designed by Suat</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div class="container">
+    <div class="card map-card">
+		<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Warthestra%C3%9Fe%2024%2C%20K%C3%B6ln%2C%20Deutschland&amp;t=m&amp;z=11&amp;output=embed&amp;iwloc=near" title="Warthestraße 24, Köln, Deutschland" aria-label="Warthestraße 24, Köln, Deutschland"></iframe>
+    </div>
+  </div>
+  
+  <!-- Materialize JavaScript CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, {});
+    });
+	
+	  function createSnowflake() {
+    const snowflake = document.createElement("div");
+    snowflake.classList.add("snowflake");
+    //snowflake.textContent = "❆";
+	snowflake.textContent = "Erste Hilfe";
+    
+    // Zufällige Startposition, Größe und Transparenz
+    snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+    snowflake.style.fontSize = `${Math.random() * 20 + 10}px`; // Größen zwischen 10px und 30px
+    snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Opazität zwischen 0.5 und 1
+
+    // Animationen zufällig generieren
+    const duration = Math.random() * 5000 + 3000; // Dauer zwischen 3s und 8s
+    const delay = Math.random() * 3000; // Zufälliger Startzeitpunkt (Verzögerung)
+    const horizontalDrift = Math.random() * 100 - 50; // Zufällige Drift (links/rechts)
+    const windStrength = Math.random() * 100 + 50; // Stärke des Winds (Schwanken nach links und rechts)
+	
+	var divHeader = document.querySelector('.containerHeader');
+
+    divHeader.appendChild(snowflake);
+
+    // Animationsablauf der Schneeflocken mit Wind-Effekt
+    const keyframes = [
+      { 
+        transform: `translate(${horizontalDrift}px, 0px) rotate(${Math.random() * 360}deg)` 
+      },
+      { 
+        transform: `translate(${horizontalDrift + Math.sin(0.5) * windStrength}px, ${window.innerHeight}px) rotate(${Math.random() * 360}deg)` 
+      }
+    ];
+
+    snowflake.animate(keyframes, {
+      duration: duration,
+      delay: delay,
+      iterations: 1,
+      easing: 'ease-in-out' // Sanfte Beschleunigung
+    }).onfinish = () => {
+      snowflake.remove(); // Schneeflocke nach Animation entfernen
+    };
+  }
+
+  // Schneeflocken regelmäßig erstellen
+  setInterval(createSnowflake, 150); // Häufigkeit der Schneeflocken erhöhen
+  </script>
 </body>
 </html>
