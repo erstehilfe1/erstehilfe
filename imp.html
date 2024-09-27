@@ -135,102 +135,50 @@
     <li><a href="ds.html">Datenschutz</a></li>
   </ul>
   
-   <div class="containerHeader"> 
-	  <div class="header">
-		<h1>Erste Hilfe Kurs in Köln</h1>
-	  </div>
-    </div>
-
+  <!-- Content -->
   <div class="container">
-    <div class="row">
-      <!-- Card 1: Erste Hilfe Kurse -->
-      <div class="col s12 m6"> <!-- s12 für kleine Geräte, m6 für mittlere und größere Geräte -->
-        <div class="card cardAnimation">
-          <div class="card-content">
-            <span class="card-title">Erste Hilfe Kurse in Köln Chorweiler</span>			
-			  <p><i class="material-icons">check</i>Erste Hilfe Kurse für den Führerschein.</p>
-			  <p><i class="material-icons">check</i>Regelmäßige Samstag-Kurse</p>			  
-			  <p><i class="material-icons">check</i>Nur 1 Tag (7,5 Stunden)</p>
-			  <p><i class="material-icons">check</i>Gültig für alle Führerscheinklassen</p>	
-
-			  <p><i class="material-icons">check</i>Anmeldung unter der Telefonnummer: </p>				  
-          </div>
-        </div>
-      </div>
-      
-      <!-- Card 2: Hüseyin Bicer -->
-      <div class="col s12 m6"> <!-- s12 für kleine Geräte, m6 für mittlere und größere Geräte -->
-        <div class="card cardAnimation">
-          <div class="card-content">
-            <span class="card-title">Hüseyin Bicer</span>
-            <p>The best help coach.</p>
-			
-			 <p>Designed by Suat</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
- <div class="container">
-    <div class="card map-card">
-		<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Warthestra%C3%9Fe%2024%2C%20K%C3%B6ln%2C%20Deutschland&amp;t=m&amp;z=11&amp;output=embed&amp;iwloc=near" title="Warthestraße 24, Köln, Deutschland" aria-label="Warthestraße 24, Köln, Deutschland"></iframe>
-    </div>
-  </div>
   
+    <h1>Impressum</h1>
+    
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>[Ihr Name oder Firmenname]<br>
+    [Rechtsform, z.B. GmbH, AG]<br>
+    [Adresse]<br>
+    [PLZ, Ort]</p>
+
+    <h2>Vertreten durch</h2>
+    <p>[Name des Vertretungsberechtigten]</p>
+
+    <h2>Kontakt</h2>
+    <p>Telefon: [Ihre Telefonnummer]<br>
+    E-Mail: <a href="mailto:[Ihre E-Mail-Adresse]">[Ihre E-Mail-Adresse]</a><br>
+    Webseite: <a href="[Ihre Webseite]">[Ihre Webseite]</a></p>
+
+    <h2>Umsatzsteuer-ID</h2>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: [Ihre USt-IdNr.]</p>
+
+    <h2>Haftungsausschluss</h2>
+    <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+
+    <h2>Haftung für Links</h2>
+    <p>Unsere Website enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+    <h2>Urheberrecht</h2>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+
+    <p><strong>Stand: [Datum]</strong></p>
+	
+  </div>
+
   <!-- Materialize JavaScript CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-  <!-- Custom JavaScript -->
+  
+    <!-- Custom JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('.sidenav');
       var instances = M.Sidenav.init(elems, {});
     });
-	
-	  function createSnowflake() {
-    const snowflake = document.createElement("div");
-    snowflake.classList.add("snowflake");
-    //snowflake.textContent = "❆";
-	snowflake.textContent = "Erste Hilfe";
-    
-    // Zufällige Startposition, Größe und Transparenz
-    snowflake.style.left = `${Math.random() * window.innerWidth}px`;
-    snowflake.style.fontSize = `${Math.random() * 20 + 10}px`; // Größen zwischen 10px und 30px
-    snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Opazität zwischen 0.5 und 1
-
-    // Animationen zufällig generieren
-    const duration = Math.random() * 5000 + 3000; // Dauer zwischen 3s und 8s
-    const delay = Math.random() * 3000; // Zufälliger Startzeitpunkt (Verzögerung)
-    const horizontalDrift = Math.random() * 100 - 50; // Zufällige Drift (links/rechts)
-    const windStrength = Math.random() * 100 + 50; // Stärke des Winds (Schwanken nach links und rechts)
-	
-	var divHeader = document.querySelector('.containerHeader');
-
-    divHeader.appendChild(snowflake);
-
-    // Animationsablauf der Schneeflocken mit Wind-Effekt
-    const keyframes = [
-      { 
-        transform: `translate(${horizontalDrift}px, 0px) rotate(${Math.random() * 360}deg)` 
-      },
-      { 
-        transform: `translate(${horizontalDrift + Math.sin(0.5) * windStrength}px, ${window.innerHeight}px) rotate(${Math.random() * 360}deg)` 
-      }
-    ];
-
-    snowflake.animate(keyframes, {
-      duration: duration,
-      delay: delay,
-      iterations: 1,
-      easing: 'ease-in-out' // Sanfte Beschleunigung
-    }).onfinish = () => {
-      snowflake.remove(); // Schneeflocke nach Animation entfernen
-    };
-  }
-
-  // Schneeflocken regelmäßig erstellen
-  setInterval(createSnowflake, 150); // Häufigkeit der Schneeflocken erhöhen
-  </script>
+  </script>  
 </body>
 </html>
