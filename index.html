@@ -183,54 +183,71 @@
 
   <!-- Custom JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.sidenav');
-      var instances = M.Sidenav.init(elems, {});
-    });
+	  document.addEventListener('DOMContentLoaded', function() {
+		 var elems = document.querySelectorAll('.sidenav');
+		 var instances = M.Sidenav.init(elems, {});
+	  });
+	  
+	  const schlagwoerter = [
+		"Lebensrettend",
+		"Sicherheit",
+		"Selbstvertrauen",
+		"Praktische Fähigkeiten",
+		"Zugang zu Wissen",
+		"Berufliche Qualifikation",
+		"Gemeinschaftsengagement",
+		"Familienorientiert",
+		"Einfache Techniken",
+		"Notfallbewusstsein"
+		];
 	
 	  function createSnowflake() {
-    const snowflake = document.createElement("div");
-    snowflake.classList.add("snowflake");
-    //snowflake.textContent = "❆";
-	snowflake.textContent = "Erste Hilfe";
-    
-    // Zufällige Startposition, Größe und Transparenz
-    snowflake.style.left = `${Math.random() * window.innerWidth}px`;
-    snowflake.style.fontSize = `${Math.random() * 20 + 10}px`; // Größen zwischen 10px und 30px
-    snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Opazität zwischen 0.5 und 1
+		const snowflake = document.createElement("div");
+		snowflake.classList.add("snowflake");
+		snowflake.textContent = schlagwoerter[Math.floor(Math.random() * schlagwoerter.length)];
 
-    // Animationen zufällig generieren
-    const duration = Math.random() * 5000 + 3000; // Dauer zwischen 3s und 8s
-    const delay = Math.random() * 3000; // Zufälliger Startzeitpunkt (Verzögerung)
-    const horizontalDrift = Math.random() * 100 - 50; // Zufällige Drift (links/rechts)
-    const windStrength = Math.random() * 100 + 50; // Stärke des Winds (Schwanken nach links und rechts)
-	
+		// Zufällige Startposition, Größe und Transparenz
+		snowflake.style.left = `${Math.random() * window.innerWidth}px`;
+		snowflake.style.fontSize = `${Math.random() * 20 + 10}px`; // Größen zwischen 10px und 30px
+		snowflake.style.opacity = Math.random() * 0.5 + 0.5; // Opazität zwischen 0.5 und 1
+
+		// Animationen zufällig generieren
+		const duration = Math.random() * 5000 + 3000; // Dauer zwischen 3s und 8s
+		const delay = Math.random() * 3000; // Zufälliger Startzeitpunkt (Verzögerung)
+		const horizontalDrift = Math.random() * 100 - 50; // Zufällige Drift (links/rechts)
+		const windStrength = Math.random() * 100 + 50; // Stärke des Winds (Schwanken nach links und rechts)
+
+
+		divHeader.appendChild(snowflake);
+
+		// Animationsablauf der Schneeflocken mit Wind-Effekt
+		const keyframes = [
+		  { 
+			transform: `translate(${horizontalDrift}px, 0px) rotate(${Math.random() * 360}deg)` 
+		  },
+		  { 
+			transform: `translate(${horizontalDrift + Math.sin(0.5) * windStrength}px, ${window.innerHeight}px) rotate(${Math.random() * 360}deg)` 
+		  }
+		];
+
+		snowflake.animate(keyframes, {
+		  duration: duration,
+		  delay: delay,
+		  iterations: 1,
+		  easing: 'ease-in-out' // Sanfte Beschleunigung
+		}).onfinish = () => {
+		  snowflake.remove(); // Schneeflocke nach Animation entfernen
+		};
+	}
+
 	var divHeader = document.querySelector('.containerHeader');
+	
+	divHeader.addEventListener('animationend', function() {
+	    createSnowflake();
+		// Schneeflocken regelmäßig erstellen
+		setInterval(createSnowflake, 150); // Häufigkeit der Schneeflocken erhöhen
+	});
 
-    divHeader.appendChild(snowflake);
-
-    // Animationsablauf der Schneeflocken mit Wind-Effekt
-    const keyframes = [
-      { 
-        transform: `translate(${horizontalDrift}px, 0px) rotate(${Math.random() * 360}deg)` 
-      },
-      { 
-        transform: `translate(${horizontalDrift + Math.sin(0.5) * windStrength}px, ${window.innerHeight}px) rotate(${Math.random() * 360}deg)` 
-      }
-    ];
-
-    snowflake.animate(keyframes, {
-      duration: duration,
-      delay: delay,
-      iterations: 1,
-      easing: 'ease-in-out' // Sanfte Beschleunigung
-    }).onfinish = () => {
-      snowflake.remove(); // Schneeflocke nach Animation entfernen
-    };
-  }
-
-  // Schneeflocken regelmäßig erstellen
-  setInterval(createSnowflake, 150); // Häufigkeit der Schneeflocken erhöhen
   </script>
 </body>
 </html>
