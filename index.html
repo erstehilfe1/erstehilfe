@@ -198,9 +198,20 @@
 
   <!-- Custom JavaScript -->
   <script>
+  
+	  var divHeader = document.querySelector('.containerHeader');
+	  
 	  document.addEventListener('DOMContentLoaded', function() {
 		 var elems = document.querySelectorAll('.sidenav');
 		 var instances = M.Sidenav.init(elems, {});
+			 
+		 divHeader.addEventListener('animationend', function() {
+		 createSnowflake();
+			// Schneeflocken regelmäßig erstellen
+			setInterval(createSnowflake, 150); // Häufigkeit der Schneeflocken erhöhen
+		});
+		 
+		 animateInfoText();		 		 
 	  });
 	  
 	  const schlagwoerter = [
@@ -255,13 +266,7 @@
 		};
 	}
 
-	var divHeader = document.querySelector('.containerHeader');
 
-	divHeader.addEventListener('animationend', function() {
-	    createSnowflake();
-		// Schneeflocken regelmäßig erstellen
-		setInterval(createSnowflake, 150); // Häufigkeit der Schneeflocken erhöhen
-	});
 	
 	const textElement = document.getElementById('infoText');
         
@@ -287,8 +292,6 @@
 			animateInfoText();
 		}, 4000);
 	}
-
-	animateInfoText();
 
   </script>
 </body>
