@@ -6,10 +6,20 @@
     <title>Bild-Slider mit Materialize und dynamischem Text</title>
 
     <!-- Materialize CSS und Google Material Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">	
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	    <!-- Materialize JS und jQuery einbinden -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <style>
+
+		* {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		}
 
 		html, body {
 		  width: 100%;
@@ -27,45 +37,6 @@
 		  border: 0;
 		}
 		
-		#infoText {
-			margin-top: 10px;
-			font-size: 50px;
-			opacity: 1;
-			transition: opacity 2s;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		
-		.map-card {
-		  padding: 0;  /* Kein Padding innerhalb der Karte */
-		}
-		
-		.card-content {
-		  text-align: left;
-		}
-
-		.card-content p {
-		  margin: 0;
-		  padding: 0;
-		  display: flex;
-		  align-items: center; /* Vertikale Ausrichtung des Icons und Texts */
-		}
-
-		.card-content i {
-		  color: green; /* Farbe des Häkchens */
-		  margin-right: 10px; /* Abstand zwischen Icon und Text */
-		}
-		
-		.containerHeader {
-			margin-top: 10px;
-			background-color: #034efc;
-			padding: 30px;
-			border-radius: 10px;
-			animation: zoomIn 1.5s ease-out;
-			position: relative;
-			overflow: hidden; 
-		}
 		@keyframes zoomIn {
 			from { opacity: 0; transform: scale(0.8); }
 			to { opacity: 1; transform: scale(1); }
@@ -76,24 +47,6 @@
 		}
 		.header h1 {
 			font-size: 3rem;
-		}
-		
-		.cardAnimation {
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-		}
-
-		.cardAnimation:hover {
-			transform: scale(1.05); /* Vergrößert die Karte leicht */
-			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Fügt einen Schatten hinzu */
-		}
-		
-		.snowflake {
-		  position: absolute;
-		  top: -50px;
-		  color: white;
-		  font-size: 1em;
-		  opacity: 0.8;
-		  user-select: none;
 		}
 
 		.gradient-shadow {
@@ -251,14 +204,14 @@
 		</div>
 	  </nav>
 	</div>
-
+  
   <!-- Side Navigation for Mobile -->
   <ul class="sidenav" id="mobile-nav">
     <li><a href="index.html">Home</a></li>
 	<li><a href="ref.html">Bildergalerie</a></li>			
     <li><a href="imp.html">Impressum</a></li>
     <li><a href="ds.html">Datenschutz</a></li>
-  </ul>
+  </ul>  
 
     <h1>Bildergalerie</h1>
 
@@ -313,14 +266,13 @@
         </div>
     </div>
 
-    <!-- Materialize JS und jQuery einbinden -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
     <script>
 
         // Initialisiere das Carousel mit Materialize
         document.addEventListener('DOMContentLoaded', function() {
+			var elems = document.querySelectorAll('.sidenav');
+			var instances = M.Sidenav.init(elems, {});				
+		
             var elems = document.querySelectorAll('.carousel');
             var instances = M.Carousel.init(elems, {
                 fullWidth: true,
