@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bild-Slider mit Materialize und dynamischem Text</title>
+
+    <!-- Materialize CSS und Google Material Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+
+		html, body {
+		  width: 100%;
+		  height: 100%;
+		}
+
+		p {
+		  font-size: 18px; 
+		  color: black; 
+		}
+		
+		iframe {
+		  width: 100%;  /* Volle Breite des übergeordneten Containers */
+		  height: 450px; /* Feste Höhe */
+		  border: 0;
+		}
+		
+		#infoText {
+			margin-top: 10px;
+			font-size: 50px;
+			opacity: 1;
+			transition: opacity 2s;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.map-card {
+		  padding: 0;  /* Kein Padding innerhalb der Karte */
+		}
+		
+		.card-content {
+		  text-align: left;
+		}
+
+		.card-content p {
+		  margin: 0;
+		  padding: 0;
+		  display: flex;
+		  align-items: center; /* Vertikale Ausrichtung des Icons und Texts */
+		}
+
+		.card-content i {
+		  color: green; /* Farbe des Häkchens */
+		  margin-right: 10px; /* Abstand zwischen Icon und Text */
+		}
+		
+		.containerHeader {
+			margin-top: 10px;
+			background-color: #034efc;
+			padding: 30px;
+			border-radius: 10px;
+			animation: zoomIn 1.5s ease-out;
+			position: relative;
+			overflow: hidden; 
+		}
+		@keyframes zoomIn {
+			from { opacity: 0; transform: scale(0.8); }
+			to { opacity: 1; transform: scale(1); }
+		}
+		.header {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		.header h1 {
+			font-size: 3rem;
+		}
+		
+		.cardAnimation {
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.cardAnimation:hover {
+			transform: scale(1.05); /* Vergrößert die Karte leicht */
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Fügt einen Schatten hinzu */
+		}
+		
+		.snowflake {
+		  position: absolute;
+		  top: -50px;
+		  color: white;
+		  font-size: 1em;
+		  opacity: 0.8;
+		  user-select: none;
+		}
+
+		.gradient-shadow {
+			font-family: 'Merriweather', cursive; /* Verwenden der Lobster-Schriftart */
+			font-style: italic; /* Kursiv */
+			font-size: 48px;                  /* Schriftgröße */
+			background: linear-gradient(45deg, #3498db, #e74c3c); /* Farbverlauf von Blau nach Rot */
+			-webkit-background-clip: text;    /* Wendet den Hintergrund nur auf den Text an (nur in Webkit-Browsern) */
+			color: transparent;               /* Textfarbe transparent, da der Verlauf den Text färbt */
+			text-align: center;               /* Zentrierte Ausrichtung */
+			font-weight: bold;                /* Fettschrift */
+			padding: 10px;                    /* Innenabstand */
+			text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); /* Textschatten für 3D-Effekt */
+		}		
+	
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aliceblue;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: darkslategray;
+            text-align: center;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        /* Carousel-Container */
+        .carousel-item {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;  /* Überschüssige Teile der Bilder abschneiden */
+            height: 60vh;  /* Feste Höhe des Carousels */
+        }
+
+        /* Carousel-Item-Bilder */
+        .carousel-item img {
+            width: 100%;  /* Bilder passen sich in der Breite an */
+            height: 100%; /* Bilder passen sich in der Höhe an */
+            object-fit: contain;  /* Skaliert das Bild so, dass es vollständig ins Container passt */
+            object-position: center; /* Bild bleibt zentriert */
+            border-radius: 10px;
+        }
+
+        /* Text Container über dem Carousel */
+        .carousel-caption {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 3vw;  /* Kleinere Schriftgröße */
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.6);  /* Weniger Deckkraft für unauffälligeres Aussehen */
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-align: center;
+            max-width: 90%;
+            z-index: 10;
+            pointer-events: none; /* Verhindert, dass der Text Interaktionen blockiert */
+            top: 70%;  /* Position weiter nach unten verschieben */
+        }
+
+        /* Buttons - Pfeil-Buttons */
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .buttons button {
+            font-size: 2rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+            width: 60px; /* Feste Breite */
+            height: 60px; /* Feste Höhe */
+        }
+
+        .buttons button:hover {
+            background-color: rgba(0, 128, 0, 0.8);
+            width: 70px; /* Vergrößere die Button-Größe bei Hover */
+            height: 70px; /* Vergrößere die Button-Größe bei Hover */
+        }
+
+        .buttons button:active {
+            background-color: forestgreen;
+            width: 60px; /* Zurück zur ursprünglichen Größe bei Aktivierung */
+            height: 60px; /* Zurück zur ursprünglichen Größe bei Aktivierung */
+        }
+
+        /* Pfeil-Icons */
+        .buttons i {
+            font-size: 2.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .carousel-caption {
+                font-size: 5vw;
+                top: 75%; /* Position weiter nach unten auf kleineren Geräten */
+            }
+
+            .buttons button {
+                font-size: 4vw;
+                padding: 12px 18px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .carousel-caption {
+                font-size: 6vw;
+                top: 80%; /* Position weiter nach unten auf sehr kleinen Geräten */
+            }
+
+            .buttons button {
+                font-size: 6vw;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+    <div class="navbar-fixed">
+	  <nav>
+		<div class="nav-wrapper" style="background-color: lightgreen;">
+		  <a href="index.html" class="brand-logo">Tel: 0221 123456</a>
+		  <a href="#" data-target="mobile-nav" class="sidenav-trigger right"><i class="material-icons" style="font-size: 48px;">menu</i></a>
+		  <ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="ref.html">Bildergalerie</a></li>					
+			<li><a href="imp.html">Impressum</a></li>
+			<li><a href="ds.html">Datenschutz</a></li>
+		  </ul>
+		</div>
+	  </nav>
+	</div>
+
+  <!-- Side Navigation for Mobile -->
+  <ul class="sidenav" id="mobile-nav">
+    <li><a href="index.html">Home</a></li>
+	<li><a href="ref.html">Bildergalerie</a></li>			
+    <li><a href="imp.html">Impressum</a></li>
+    <li><a href="ds.html">Datenschutz</a></li>
+  </ul>
+
+    <h1>Bildergalerie</h1>
+
+    <div class="container">
+        <!-- Bildslider mit Materialize Carousel -->
+        <div class="carousel carousel-slider center" id="carousel">
+            <!-- Carousel Item 1 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-1.jpg" alt="Bild 1">
+            </div>
+
+            <!-- Carousel Item 2 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-2.jpg" alt="Bild 1">
+            </div>
+
+            <!-- Carousel Item 3 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-3.jpg" alt="Bild 1">
+            </div>
+            <!-- Carousel Item 4 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-4.jpg" alt="Bild 1">
+            </div>
+            <!-- Carousel Item 1 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-5.jpg" alt="Bild 1">
+            </div>
+
+            <!-- Carousel Item 2 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-6.jpg" alt="Bild 1">
+            </div>
+
+            <!-- Carousel Item 3 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-7.jpg" alt="Bild 1">
+            </div>
+            <!-- Carousel Item 4 -->
+            <div class="carousel-item">
+                <img src="bld/IMG-8.jpg" alt="Bild 1">
+            </div>			
+						
+			
+			
+        </div>
+
+        <!-- Buttons für manuelles Wechseln -->
+        <div class="buttons">
+            <button onclick="moveCarousel(-1)"><i class="material-icons">arrow_back</i></button>
+            <button onclick="moveCarousel(1)"><i class="material-icons">arrow_forward</i></button>
+        </div>
+    </div>
+
+    <!-- Materialize JS und jQuery einbinden -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+
+        // Initialisiere das Carousel mit Materialize
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.carousel');
+            var instances = M.Carousel.init(elems, {
+                fullWidth: true,
+                indicators: true
+            });
+
+            // Automatischer Bildwechsel alle 4 Sekunden
+            setInterval(function() {
+                var instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+                instance.next();
+                updateText(instance); // Text nach jedem Bildwechsel aktualisieren
+            }, 4000); // Alle 4 Sekunden wird das nächste Bild angezeigt
+
+            // Beim Starten den Text gleich anzeigen
+            updateText(M.Carousel.getInstance(document.querySelector('.carousel')));
+
+        });
+
+        // Funktion zum manuellen Wechseln der Bilder im Carousel
+        function moveCarousel(direction) {
+            var instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+            if (direction === 1) {
+                instance.next();
+            } else if (direction === -1) {
+                instance.prev();
+            }
+            updateText(instance);
+        }
+
+        // Funktion, die den Text aktualisiert, basierend auf dem aktuellen Bild
+        function updateText(instance) {
+            var currentIndex = instance.getActiveIndex(); // Index des aktuellen Bildes
+            var caption = document.querySelectorAll('.carousel-caption')[currentIndex]; // Holen der richtigen Text-Div
+
+            // Alle Captions ausblenden
+            document.querySelectorAll('.carousel-caption').forEach(function(caption) {
+                caption.style.display = 'none';
+            });
+
+            // Den richtigen Text anzeigen
+            caption.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
